@@ -7,6 +7,26 @@ Categorize risks based on severity and likelihood.
 Define regular backup schedules for critical data and systems.
 Clearly outline the process for data restoration and system recovery.
 
+\subsection{Backup Procedure}
+The network backup is scheduled to run twice daily on both summit and base devices. The backup encompasses Switches, routers, and Firewalls. It's specifically designed to exclude any sensitive information like keys or passwords. Once completed, the backup is pushed to a private repository.
+
+\subsection{Restore Procedures}
+In the event of device failure or replacement, the restoration process offers three options:
+
+\subsubsection{Manual Restoration}
+Access the repository to retrieve the last backup of the device.
+Manually reconfigure the new device based on the retrieved backup.
+Suitable for situations requiring a manual review and setup of a new device.
+
+\subsubsection{Zero-Touch Provisioning (In Progress)}
+Utilize a preliminary configuration on new devices.
+Upon startup, the device automatically updates its software and retrieves the latest backup from the repository.
+Simplifies and automates the restoration process for newly deployed devices.
+
+\subsubsection{Infrastructure as Code (In Progress)}
+Leveraging the repository network, a sequence of tasks is designed to reconstruct and upgrade device configurations.
+Embraces an infrastructure-as-code approach, allowing for streamlined rebuilding and upgrading of devices.
+
 \section{Emergency Response Team}
 Designate roles and responsibilities for the Emergency Response Team.
 Establish communication channels and protocols during a crisis.
