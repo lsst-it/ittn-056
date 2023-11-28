@@ -1,0 +1,63 @@
+\section{Risk Assessment}
+
+Identify potential risks and threats to the organization's IT infrastructure.
+Categorize risks based on severity and likelihood.
+
+\section{Backup and Recovery Procedures}
+The following outlines the backup schedules for critical data and systems, and the data restoration strategy
+
+\subsection{Backup Procedure}
+The network backup is scheduled to run twice daily on both summit and base devices. The backup encompasses Switches, routers, and Firewalls. It's specifically designed to exclude any sensitive information like keys or passwords. Once completed, the backup is pushed to a private repository.
+
+\subsection{Restore Procedures}
+In the event of device failure or replacement, the restoration process offers three options:
+
+\subsubsection{Manual Restoration}
+Access the repository to retrieve the last backup of the device.
+Manually reconfigure the new device based on the retrieved backup.
+Suitable for situations requiring a manual review and setup of a new device.
+
+\subsubsection{Zero-Touch Provisioning (In Progress)}
+Utilize a preliminary configuration on new devices.
+Upon startup, the device automatically updates its software and retrieves the latest backup from the repository.
+Simplifies and automates the restoration process for newly deployed devices.
+
+\subsubsection{Infrastructure as Code (In Progress)}
+Leveraging the repository network, a sequence of tasks is designed to reconstruct and upgrade device configurations.
+Embraces an infrastructure-as-code approach, allowing for streamlined rebuilding and upgrading of devices.
+
+\section{Emergency Response Team}
+Designate roles and responsibilities for the Emergency Response Team.
+Establish communication channels and protocols during a crisis.
+\subsection{Incident Commander (IC)}
+
+\begin{itemize}
+    \item Assumed control, coordinating with technical experts and relevant stakeholders.
+    \item Prioritized resolution tasks to restore network functionality swiftly.
+\end{itemize}
+
+IC should usually be the Devops Manager, in his absence a Network team member can take the role.
+
+\subsection{Communications}
+
+\begin{itemize}
+    \item Facilitated the rapid deployment of technical resources and tools.
+    \item Established a centralized communication hub for real-time updates.
+\end{itemize}
+
+Communications will be taken care by Devops Manager, in his absence another team member, not performing technical tasks can take the role.
+
+\subsection{Technical Support and Analysis}
+
+\begin{itemize}
+    \item Diagnosed the root cause of the incident and devised an action plan.
+    \item Collaborated with vendors and internal teams to implement corrective measures.
+\end{itemize}
+
+\section{Infrastructure Resilience}
+Implement measures to enhance infrastructure resilience.
+Ensure redundancy in critical systems and data storage.
+
+\section{Testing and Training}
+Conduct regular disaster recovery drills to assess the efficiency of procedures.
+Provide ongoing training for the response team.
