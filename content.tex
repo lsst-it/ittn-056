@@ -9,6 +9,68 @@ The following outlines the backup schedules for critical data and systems, and t
 \subsection{Backup Procedure}
 The network backup is scheduled to run twice daily on both summit and base devices. The backup encompasses Switches, routers, and Firewalls. It's specifically designed to exclude any sensitive information like keys or passwords. Once completed, the backup is pushed to a private repository.
 
+The network backup process is a crucial aspect of our infrastructure maintenance, ensuring data integrity and system resilience. Utilizing the open-source agentless orchestration manager, Ansible, facilitates efficient and consistent backup operations. Ansible operates via playbooks, which are sets of instructions defining tasks to be executed on managed devices. In this context, the backup process is orchestrated through a playbook named 'backup/netdevices.yml.'
+
+The playbook 'backup/netdevices.yml' interacts with an inventory file, 'inventory/netdevices.yml', which functions as a roadmap or directory of devices to be backed up. It's essential to maintain an up-to-date inventory file, reflecting the current network topology and device configurations across both the summit and base datacenters. This inventory file lists all switches, routers, and firewalls, ensuring comprehensive coverage during the backup process.
+
+The command used to execute the backup process is:
+
+\begin{verbatim}
+ansible-playbook -i inventory/netdevices.yml backup/netdevices.yml
+\end{verbatim}
+
+Breaking down the command:
+\begin{itemize}
+    \item `ansible-playbook`: Initiates Ansible to run a playbook.
+    \item `-i inventory/netdevices.yml`: Specifies the inventory file path, telling Ansible where to find information about the devices it should manage.
+    \item `backup/netdevices.yml`: Identifies the playbook file containing instructions for the backup process.
+\end{itemize}
+
+Upon execution, this command triggers Ansible to reference the inventory file to locate and communicate with the specified devices. It then follows the instructions outlined in 'netdevices.yml' playbook to perform the backup operation, excluding sensitive information like keys or passwords. Once completed, the backed-up data is securely transferred to a private repository for safekeeping and future restoration if necessary."
+
+\newpage
+\section{Playbook}
+\begin{verbatim}
+    - name: Check Running Configuration (ARISTA EOS)
+      arista.eos.eos_config:
+        backup: yes
+      register: backup_arista
+      become: yes
+      become_method: enable
+      when: ansible_network_os == 'arista.eos.eos'
+    - name: Saving output (ARISTA)
+      copy:
+        src: "{{ backup_arista.backup_path }}"
+        dest: "~/ansible_network/backup/{{inventory_hostname}}-{{ ansible_net_hostname }}-config.txt"
+      when: ansible_network_os == 'arista.eos.eos'
+\end{verbatim}
+
+\subsection{Task 1: Check Running Configuration 
+}
+- Description: This task involves checking the running configuration on Arista EOS devices.
+\begin{itemize}
+    \item  `name`: A label or identifier for the task.
+    \item  `arista.eos.eos_config`: Ansible module used to interact with Arista EOS devices for configuration-related tasks.
+    \item  `backup: yes`: Specifies to create a backup of the configuration.
+    \item  `register: backup_arista`: Stores the result/output of the task in a variable named `backup_arista`.
+    \item  `become: yes`: Executes the task with elevated privileges (requires appropriate privileges).
+    \item  `become_method: enable`: Specifies the method for privilege escalation (here, using the 'enable' method).
+    \item  `when: ansible_network_os == 'arista.eos.eos'`: This task will execute only if the network operating system (OS) identified by Ansible (`ansible_network_os`) matches 'arista.eos.eos'.
+\end{itemize}
+
+\subsection{Task 2: Saving output }
+\begin{itemize}
+    \item  Description: Saves the output or backup generated from the previous task.
+    \item  `name`: Descriptive label for the task.
+    \item  `copy`: Ansible module used to copy files or data.
+    \item  `src: "{{ backup_arista.backup_path }}"`: Specifies the source path for the backup file generated in the previous task (stored in the variable `backup_arista`).
+    \item  `dest: "~/ansible_network/backup/{{inventory_hostname}}-{{ ansible_net_hostname }}-config.txt"`: Defines the destination path and filename structure for saving the configuration backup. It uses variables like `inventory_hostname` (the name of the device as defined in the inventory) and `ansible_net_hostname` (the hostname of the device as detected by Ansible).
+    \item  `when: ansible_network_os == 'arista.eos.eos'`: This task will execute only if the network operating system (OS) identified by Ansible matches 'arista.eos.eos'.
+\end{itemize}
+
+In summary, this Ansible playbook snippet checks the running configuration of Arista EOS devices, creates a backup of the configuration if the device OS matches the specified criteria, and then saves that backup file with a structured filename based on the device's hostname and inventory hostname.
+
+
 \subsection{Restore Procedures}
 In the event of device failure or replacement, the restoration process offers three options:
 
