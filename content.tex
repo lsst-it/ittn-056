@@ -4,8 +4,7 @@ Identify potential risks and threats to the organization's IT infrastructure.
 Categorize risks based on severity and likelihood.
 
 \section{Backup and Recovery Procedures}
-Define regular backup schedules for critical data and systems.
-Clearly outline the process for data restoration and system recovery.
+The following outlines the backup schedules for critical data and systems, and the data restoration strategy
 
 \subsection{Backup Procedure}
 The network backup is scheduled to run twice daily on both summit and base devices. The backup encompasses Switches, routers, and Firewalls. It's specifically designed to exclude any sensitive information like keys or passwords. Once completed, the backup is pushed to a private repository.
@@ -30,6 +29,30 @@ Embraces an infrastructure-as-code approach, allowing for streamlined rebuilding
 \section{Emergency Response Team}
 Designate roles and responsibilities for the Emergency Response Team.
 Establish communication channels and protocols during a crisis.
+\subsection{Incident Commander (IC)}
+
+\begin{itemize}
+    \item Assumed control, coordinating with technical experts and relevant stakeholders.
+    \item Prioritized resolution tasks to restore network functionality swiftly.
+\end{itemize}
+
+IC should usually be the Devops Manager, in his absence a Network team member can take the role.
+
+\subsection{Communications}
+
+\begin{itemize}
+    \item Facilitated the rapid deployment of technical resources and tools.
+    \item Established a centralized communication hub for real-time updates.
+\end{itemize}
+
+Communications will be taken care by Devops Manager, in his absence another team member, not performing technical tasks can take the role.
+
+\subsection{Technical Support and Analysis}
+
+\begin{itemize}
+    \item Diagnosed the root cause of the incident and devised an action plan.
+    \item Collaborated with vendors and internal teams to implement corrective measures.
+\end{itemize}
 
 \section{Infrastructure Resilience}
 Implement measures to enhance infrastructure resilience.
