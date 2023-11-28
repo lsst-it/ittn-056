@@ -1,6 +1,6 @@
-\documentclass[PMO,authoryear,toc]{lsstdoc}
+\documentclass[PMO,authoryear,lsstdraft,toc]{lsstdoc}
 % lsstdoc documentation: https://lsst-texmf.lsst.io/lsstdoc.html
-\input{meta}
+
 
 % Package imports go here.
 
@@ -22,7 +22,7 @@ Cristian Silva
 \setDocRef{ITTN-056}
 \setDocUpstreamLocation{\url{https://github.com/lsst-it/ittn-056}}
 
-\date{\vcsDate}
+\date {\today}
 
 % Optional: name of the document's curator
 % \setDocCurator{The Curator of this Document}
@@ -36,7 +36,9 @@ Details of network devices Disaster Recovery plan
 % Fields: VERSION, DATE, DESCRIPTION, OWNER NAME.
 % See LPM-51 for version number policy.
 \setDocChangeRecord{%
-  \addtohist{1}{YYYY-MM-DD}{Unreleased.}{Cristian Silva}
+  \addtohist{1}{2023-03-02}{Unreleased.}{Cristian Silva}
+  \addtohist{1}{2023-11-20}{Early draft}{Cristian Silva}
+
 }
 
 
@@ -49,6 +51,12 @@ Details of network devices Disaster Recovery plan
 
 % ADD CONTENT HERE
 % You can also use the \input command to include several content files.
+\input{introduction.tex}
+\input{content.tex}
+\input{procedures.tex}
+
+
+
 
 \appendix
 % Include all the relevant bib files.
